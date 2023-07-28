@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Add New Student Details</title>
+</head>
+
+<body>
+    <h1>Add New Student Details</h1>
+    <form id="studentForm" action="add_student.php" method="post">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" required><br>
+
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" required><br>
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" id="dob" required><br>
+
+        <label for="parentName">Parent's Name:</label>
+        <input type="text" id="parentName" required><br>
+
+        <label for="address">Address:</label>
+        <textarea id="address" rows="4" required></textarea><br>
+
+        <label for="city">City:</label>
+        <input type="text" id="city" required><br>
+
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" id="phoneNumber" required><br>
+
+        <button type="button" onclick="addStudent()">Add Student</button>
+    </form>
+
+    <h2>List of Students</h2>
+    <table id="studentTable" border="1">
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Date of Birth</th>
+            <th>Parent's Name</th>
+            <th>Address</th>
+            <th>City</th>
+            <th>Phone Number</th>
+            <th></th> <!-- Empty header for the delete button column -->
+        </tr>
+        <!-- Student details will be added here dynamically -->
+    </table>
+
+    <script>
+        function addStudent() {
+            // Get input values
+            const firstName = document.getElementById("firstName").value;
+            const lastName = document.getElementById("lastName").value;
+            const dob = document.getElementById("dob").value;
+            const parentName = document.getElementById("parentName").value;
+            const address = document.getElementById("address").value;
+            const city = document.getElementById("city").value;
+            const phoneNumber = document.getElementById("phoneNumber").value;
+
+            // Create a new row in the table
+            const table = document.getElementById("studentTable");
+            const newRow = table.insertRow(-1);
+
+            // Add cells to the row
+            const cell1 = newRow.insertCell(0);
+            const cell2 = newRow.insertCell(1);
+            const cell3 = newRow.insertCell(2);
+            const cell4 = newRow.insertCell(3);
+            const cell5 = newRow.insertCell(4);
+            const cell6 = newRow.insertCell(5);
+            const cell7 = newRow.insertCell(6);
+            const cell8 = newRow.insertCell(7);
+
+            // Set the cell values to the input values
+            cell1.innerHTML = firstName;
+            cell2.innerHTML = lastName;
+            cell3.innerHTML = dob;
+            cell4.innerHTML = parentName;
+            cell5.innerHTML = address;
+            cell6.innerHTML = city;
+            cell7.innerHTML = phoneNumber;
+
+            // Add a delete button to the last cell
+            cell8.innerHTML = '<button type="button" onclick="deleteStudent(this)">Delete</button>';
+
+            // Clear the form after adding the student
+            document.getElementById("studentForm").reset();
+        }
+
+        function deleteStudent(button) {
+            // Remove the row when the delete button is clicked
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        }
+    </script>
+</body>
+
+</html>
